@@ -1,0 +1,340 @@
+:root {
+  --fondo-body: #e4cdd3;
+  --fondo-header: #e4cdd3;
+  --fondo-main: #e4cdd3;
+  --fondo-footer: #e4cdd3;
+  --letras-blancas: rgba(255, 255, 255, 0.8);
+  --letras: #c9184a;
+  --cherry-1: #ffb7c5; /* Rosa pastel claro */
+  --cherry-2: #ff9eb5; /* Rosa medio */
+  --cherry-3: #ff758f; /* Rosa fuerte */
+  --cherry-4: #c9184a; /* Rojo cereza */
+  --trunk-color: #8b5a2b; /* Marrón tronco */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+  display: flex;
+  min-height: 100vh;
+  overflow-x: hidden;
+  flex-direction: column;
+  background-color: var(--fondo-body);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+header {
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--fondo-header);
+}
+
+main {
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-around;
+  background-color: var(--fondo-main);
+}
+
+.container {
+  width: 100vw;
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#uno {
+  display: flex;
+  flex-direction: column;
+}
+
+.text {
+  font-size: 1rem;
+  line-height: 1.4;
+  color: var(--letras);
+  text-align: center;
+}
+
+.texto-romantico {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.5rem;
+  color: #c9184a;
+  text-align: center;
+
+  /* AQUÍ ESTÁ EL CAMBIO: 10px arriba/abajo y 20px a la izquierda/derecha */
+  margin: 10px 20px;
+
+  /* Opcional: Si el texto es muy largo, esto asegura que el interlineado se vea bien */
+  line-height: 1.4;
+
+  text-shadow: 2px 2px 8px rgba(255, 117, 143, 0.4);
+}
+
+/* --- Estilo para el Reloj, Párrafos o la Fecha --- */
+.texto-limpio {
+  margin: 10px 20px;
+  font-family: 'Quicksand', sans-serif; /* La fuente moderna y redonda */
+  font-size: 1.2rem;
+  color: #442318; /* El mismo marrón oscuro de las ramas de tu árbol */
+  line-height: 1.6; /* Da respiro entre las líneas de texto */
+  text-align: center;
+  font-weight: 500;
+}
+
+/* --- Para resaltar algo súper importante (Ej: la palabra "Sí") --- */
+.texto-destacado {
+  color: #ff4d6d;
+  font-weight: 700;
+}
+
+/* --- Contenedor principal del reloj --- */
+.clock {
+  display: flex;
+  justify-content: center;
+  gap: 12px; /* Espacio entre cada cajita */
+  margin-top: 25px;
+  margin-bottom: 20px;
+}
+
+/* --- Las cajitas o "burbujas" --- */
+.time-box {
+  background-color: rgba(
+    255,
+    183,
+    197,
+    0.25
+  ); /* Un rosa súper transparente y delicado */
+  border: 1px solid rgba(255, 117, 143, 0.3); /* Borde rosado sutil */
+  border-radius: 15px; /* Bordes bien redondeados */
+  padding: 12px 15px;
+  min-width: 65px; /* Asegura que todas las cajas tengan el mismo tamaño */
+
+  /* Sombra suave para darle volumen */
+  box-shadow: 0 6px 15px rgba(201, 24, 74, 0.08);
+
+  /* Flexbox para centrar el número y el texto adentro */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  /* Efecto moderno de cristal (opcional, pero se ve genial) */
+  backdrop-filter: blur(4px);
+}
+
+/* --- El número gigante --- */
+.time {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 2.2rem;
+  font-weight: 700; /* Negrita */
+  color: #c9184a; /* Tu rojo cereza principal */
+  line-height: 1; /* Quita el espacio extra arriba y abajo */
+  margin-bottom: 5px;
+}
+
+/* --- El texto pequeño (Días, Horas...) --- */
+.label {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase; /* Lo pone en MAYÚSCULAS */
+  letter-spacing: 1px; /* Separa un poco las letras para que se vea elegante */
+  color: #8b5a2b; /* El marrón de las ramas para mantener armonía */
+}
+
+#dos.container {
+  position: relative;
+  overflow: hidden; /* Importante: oculta los corazones que salen de la pantalla */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end; /* Alinea el árbol al suelo */
+}
+
+.tree-trunk {
+  width: 800px;
+  height: auto; /* Es mejor dejar la altura automática para no deformar */
+}
+
+#arbol-completo {
+  stroke: #8b5a2b; /* Tu color de tronco */
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-linejoin: round; /* Hace que las uniones de las ramas se vean suaves */
+}
+
+/* --- La Copa (Área de nacimiento de hojas) --- */
+/* Esta área es invisible, pero define dónde aparecen los corazones */
+.tree-canopy {
+  position: absolute;
+  bottom: 150px; /* Justo encima del tronco */
+  width: 95%; /* Ancho de la copa */
+  height: 70%; /* Alto de la copa */
+  border-radius: 100px;
+  z-index: 2;
+}
+
+.zona-hojas {
+  opacity: 0;
+  transform: scale(0);
+  /* Magia SVG: crecen desde su propio centro */
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+/* --- La forma del Corazón CSS --- */
+/* Esta es la clase que JS le pondrá a cada hojita nueva */
+.heart-leaf {
+  position: absolute;
+  width: 20px; /* Tamaño base */
+  height: 20px;
+  /* Usaremos una variable para el color, que JS cambiará aleatoriamente */
+  background-color: var(--leaf-color, var(--cherry-2));
+  transform: rotate(45deg); /* Giramos un cuadrado */
+  opacity: 0; /* Empiezan invisibles hasta que arranca la animación */
+  top: 0; /* Nacen en la parte superior de la copa */
+}
+
+/* Las partes redondeadas del corazón */
+.heart-leaf::before,
+.heart-leaf::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: inherit; /* Hereda el color del elemento principal */
+}
+
+.heart-leaf::before {
+  left: -10px;
+}
+
+.heart-leaf::after {
+  top: -10px;
+}
+
+/* --- Animación de Caída --- */
+@keyframes falling-heart {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) rotate(45deg) scale(0.5);
+  }
+  20% {
+    opacity: 1; /* Aparecen rápido */
+    transform: translate(10px, 50px) rotate(60deg) scale(1);
+  }
+  100% {
+    opacity: 0; /* Se desvanecen al llegar al suelo */
+    /* Caen hasta 500px, se mueven lateralmente y rotan */
+    transform: translate(-20px, 500px) rotate(180deg) scale(0.8);
+  }
+}
+
+footer {
+  height: 10vh;
+  display: flex;
+  padding: 0 20px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--fondo-footer);
+}
+
+.text-footer {
+  font-size: 1rem;
+  line-height: 1.4;
+  color: var(--letras);
+}
+
+.text-footer a {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 450px) {
+  body {
+    height: auto; /* Permite que el contenido fluya */
+    min-height: 100vh;
+  }
+
+  header {
+    height: 10vh;
+    font-size: 1.2rem;
+    padding-top: env(safe-area-inset-top);
+  }
+
+  main {
+    height: auto;
+    min-height: 80vh; /* Ocupa al menos el 80% de la pantalla */
+    flex-direction: column; /* Apila el texto arriba y el árbol abajo */
+    justify-content: center;
+  }
+
+  .container {
+    width: 100%;
+    height: auto; /* Deja de aplastarlos a 25vh */
+    min-height: 40vh; /* Se dividen la pantalla mitad y mitad */
+    padding: 10px 0;
+  }
+
+  /* Ajustes de Tipografía para móvil */
+  .texto-romantico {
+    font-size: 1.8rem;
+    margin: 5px 15px;
+  }
+
+  .texto-limpio {
+    font-size: 1rem;
+    margin: 10px 15px;
+  }
+
+  /* Ajustes del Reloj para que no se salga de la pantalla */
+  .clock {
+    gap: 8px; /* Menos espacio entre cajas */
+    margin-top: 15px;
+  }
+
+  .time-box {
+    min-width: 55px; /* Cajas más estrechas */
+    padding: 10px 8px;
+  }
+
+  .time {
+    font-size: 1.6rem; /* Números un poco más pequeños */
+  }
+
+  .label {
+    font-size: 0.65rem;
+  }
+
+  .tree-trunk {
+    width: 100%;
+    height: auto; /* Es mejor dejar la altura automática para no deformar */
+  }
+
+  /* Ajustes del Árbol para móvil */
+  .tree-canopy {
+    /* Bajamos un poco la copa para que coincida con el árbol escalado */
+    bottom: 95px;
+    height: 60%;
+  }
+
+  footer {
+    height: 10vh;
+  }
+
+  .text-footer {
+    font-size: 0.9rem;
+  }
+}

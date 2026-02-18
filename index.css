@@ -1,0 +1,318 @@
+:root {
+  --fondo-body: #e4cdd3;
+  --fondo-header: #e4cdd3;
+  --fondo-main: #e4cdd3;
+  --fondo-footer: #e4cdd3;
+  --letras-blancas: rgba(255, 255, 255, 0.8);
+  --letras: #c9184a;
+  --color-sobre: #b51a3a;
+  --color-carta: #f1e9d2;
+  --color-solapa-sobre: #5e081e;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  background-color: var(--fondo-body);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+header {
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--fondo-header);
+}
+
+main {
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-around;
+  background-color: var(--fondo-main);
+}
+
+.container {
+  width: 100vw;
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#scene {
+  width: 35vw;
+  height: 35vh;
+  min-width: 300px;
+  min-height: 200px;
+  margin-top: 120px;
+  perspective: 1000px;
+  cursor: pointer;
+}
+
+#envelope-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  border-radius: 10px; /* Bordes redondeados del contenedor principal */
+}
+
+#envelope-container::after {
+  content: '';
+  position: absolute;
+  bottom: -45px; /* Ubica la sombra debajo de la base del contenedor */
+  left: 10%; /* Centra la sombra */
+  width: 80%; /* Hace que la sombra sea ligeramente más estrecha que el contenedor */
+  height: 20px; /* Al tener poca altura respecto al ancho, se forma el óvalo */
+  background: rgba(
+    0,
+    0,
+    0,
+    0.66
+  ); /* Color base de la sombra (negro con 40% de opacidad) */
+  border-radius: 50%; /* Convierte el rectángulo del pseudo-elemento en un óvalo perfecto */
+  filter: blur(
+    12px
+  ); /* Difumina fuertemente los bordes para dar el efecto de sombra */
+  z-index: -1; /* Envía la sombra detrás del contenedor principal para que no lo cubra */
+}
+
+.letter-envelope {
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+#envelope-front {
+  top: 0;
+  left: 0;
+  z-index: 3;
+  position: absolute;
+  transform: rotateY(180deg);
+  backface-visibility: hidden;
+  background-color: var(--color-sobre);
+}
+
+#envelope-back {
+  top: 0;
+  left: 0;
+  z-index: 3;
+  position: absolute;
+  backface-visibility: hidden;
+  background-color: var(--color-sobre);
+}
+
+.sender-addresse {
+  top: 25%;
+  left: 10%;
+  width: 50%;
+  height: 50%;
+  padding: 35px 10px;
+  border-radius: 8px;
+  position: absolute;
+  box-sizing: border-box;
+  text-align: left;
+  font-size: 1rem;
+  line-height: 1.4;
+  color: var(--letras-blancas);
+}
+
+.postal {
+  top: 15%;
+  right: 7.5%; /* Lo movemos a la derecha como una estampilla real */
+  /* Eliminamos el 'left: 15%' para que obedezca al 'right' */
+  width: 15%; /* Más pequeño, tamaño de estampilla */
+  height: 30%;
+  position: absolute;
+  box-sizing: border-box;
+
+  display: flex;
+  justify-content: center; /* Centra horizontalmente (eje X) */
+  align-items: center; /* Centra verticalmente (eje Y) */
+}
+
+.letter {
+  top: 5%; /* ¡Aquí está la magia! La posiciona en la parte superior del sobre */
+  left: 5%;
+  opacity: 0;
+  width: 90%;
+  height: 100%; /* Recomendable que sea un poco menor a 100% para que quepa bien */
+
+  /* El z-index es clave (te lo explico abajo) */
+  z-index: 2;
+
+  display: flex;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: var(--color-carta);
+}
+
+#envelope-flap {
+  top: 0;
+  left: 0;
+  z-index: 1;
+  height: 75%;
+  width: 100%;
+  position: absolute;
+  transform-origin: top; /* Eje de rotación (bisagra) en la parte superior */
+  /* La alejamos 2 pixeles en Z para que tape a la carta */
+  backface-visibility: hidden;
+  transform: rotateY(180deg) translateZ(2px);
+  background-color: var(--color-solapa-sobre); /* Color de solapa */
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    50% 100%
+  ); /* Forma de triángulo para la solapa */
+}
+
+.text-letter {
+  font-family: 'Dancing Script', cursive;
+  transform: rotateY(180deg);
+}
+
+.img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.text p {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: var(--letras);
+}
+
+.buttons {
+  gap: 15px;
+  display: flex;
+  justify-content: center;
+  transform: rotateY(180deg);
+}
+
+button {
+  font-family: 'Dancing Script', cursive;
+  padding: 12px 30px;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-yes {
+  color: white;
+  background-color: #ff4d6d;
+  box-shadow: 0 4px 12px rgba(255, 77, 109, 0.4);
+  z-index: 100;
+  pointer-events: auto;
+}
+
+.btn-yes:hover {
+  transform: scale(1.1);
+  background-color: #ff2a55;
+}
+
+.btn-no {
+  color: #666;
+  pointer-events: none;
+  background-color: #e5e5e5;
+}
+
+footer {
+  height: 10vh;
+  display: flex;
+  padding: 0 20px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--fondo-footer);
+}
+
+.text-footer {
+  font-size: 1rem;
+  line-height: 1.4;
+  color: var(--letras);
+}
+
+.text-footer a {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 450px) {
+  body {
+    height: 100vh;
+    flex-direction: column;
+  }
+
+  header {
+    height: 10vh;
+    font-size: 1.2rem;
+    padding-top: env(safe-area-inset-top);
+  }
+
+  main {
+    height: 80vh;
+    flex-direction: column;
+  }
+
+  .container {
+    width: 100vw;
+    height: 25vh;
+  }
+
+  #scene {
+    /* Usamos 'vw' (viewport width) para que ocupe el 90% del ancho de la pantalla del celular */
+    width: 90vw;
+    /* Ajustamos el alto para mantener la proporción rectangular de un sobre */
+    height: 25vw;
+  }
+
+  .letter {
+    top: 5%;
+    left: 5%;
+    width: 90%;
+    height: 90%;
+  }
+
+  .img {
+    margin-top: -10px;
+  }
+
+  .letter .text-letter p {
+    font-size: 16px;
+    padding: 0 10px;
+    text-align: center;
+  }
+
+  .buttons button {
+    margin: 0 5px;
+    font-size: 14px;
+    padding: 8px 20px;
+  }
+
+  footer {
+    height: 10vh;
+  }
+
+  .text-footer {
+    font-size: 0.9rem;
+  }
+}
