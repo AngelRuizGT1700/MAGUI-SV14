@@ -58,5 +58,5 @@ const botonSi = document.querySelector('.btn-yes');
 // Le decimos qué hacer cuando le hagan clic
 botonSi.addEventListener('click', function () {
   // Cambia la ruta a la de tu nueva página
-  window.location.href = 'src/contador.html';
+  window.location.href = '/src/contador.html';
 });
